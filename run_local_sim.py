@@ -4,7 +4,6 @@ import time
 # Qiskit SDK
 from qiskit import execute
 
-# by Urmas
 from lib import experiments
 from lib import devices
 

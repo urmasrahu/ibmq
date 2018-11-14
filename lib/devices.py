@@ -3,7 +3,6 @@ from qiskit import execute, Aer
 from qiskit import IBMQ
 from qiskit.backends.ibmq import least_busy
 
-# by Urmas
 from lib import ibmq_login
 
 def GetLocalSimulator():
