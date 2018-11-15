@@ -1,5 +1,4 @@
 import sys
-import time
 
 # Qiskit SDK
 from qiskit import execute
@@ -13,22 +12,11 @@ def RunExperiment(circuit, device):
 
   print("Job ID:", job.job_id())
 
-  lapse = 0
-  interval = 2 # seconds
-  while job.status().name != 'DONE':
-    print('Status @ {} seconds'.format(interval * lapse), ": ", job.status(), sep="")
-    time.sleep(interval)
-    lapse += 1
-
-  print(job.status())
-  result = job.result()
+  result = job.result() # this will wait for the job to complete
 
   # Show the results
-  print("Experiment:", result)
+  print("Results:")
   print(result.get_counts(circuit))
-
-  return
-
 
 if len(sys.argv) < 2:
   print("Usage: run_local_sim.py experiment_name")

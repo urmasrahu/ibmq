@@ -45,8 +45,11 @@ def CreateExperiment_SimpleEntanglement():
 
 def CreateExperiment_Teleportation():
     q = QuantumRegister(3)
-    c = ClassicalRegister(3)
-    qc = QuantumCircuit(q, c, name="Teleportation")
+    c0 = ClassicalRegister(1, "c0")
+    c1 = ClassicalRegister(1, "c1")
+    cFinal = ClassicalRegister(1, "cFinal")
+    qc = QuantumCircuit(q, c0, c1, cFinal, name="Teleportation")
+
     qc.h(q[1]) # A (Alice's qubit)
     qc.cx(q[1], q[0]) # A controls NOT(B)
 
@@ -57,19 +60,21 @@ def CreateExperiment_Teleportation():
     qc.cx(q[2], q[1]) # transported qubit controls NOT(A)
     qc.h(q[2]) # transported qubit
 
-    qc.measure(q[2], c[0]) # transported qubit
-    qc.measure(q[1], c[1]) # A
+    qc.measure(q[2], c0[0]) # transported qubit
+    qc.measure(q[1], c1[0]) # A
 
-    # manipulate B (Bob's qubit) based on the two classical bits received
-    if (c[0] == 1):
-        qc.z(q[0])
-    if (c[1] == 1):
-        qc.x(q[0])
+    # Conditionally manipulate B (Bob's qubit) based on the two classical bits received.
+
+    # Note that according to https://quantumcomputing.stackexchange.com/questions/4270/how-would-one-implement-a-quantum-equivalent-of-a-while-loop-in-ibm-qiskit,
+    # "classical conditionals like these are not currently supported on quantum hardware". So running this experiment on a simulator works but fails on a real
+    # quantum computer.
+    qc.z(q[0]).c_if(c0, 1)
+    qc.x(q[0]).c_if(c1, 1)
 
     # now q[0] (B, Bob's qubit) has been transformed into the teleported qubit (originally q[2])
     # measuring it is not part of teleportation but let's do it anyway to end the experiment
 
-    qc.measure(q[0], c[2])
+    qc.measure(q[0], cFinal[0])
 
     return qc
 

@@ -6,7 +6,8 @@
     <ProjectGuid>{a5b15da2-d8c3-43d9-95bb-c615385d4aa3}</ProjectGuid>
     <ProjectHome />
     <StartupFile>run_local_sim.py</StartupFile>
-    <SearchPath />
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
@@ -20,6 +21,7 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="bb84.py" />
     <Compile Include="lib\devices.py" />
     <Compile Include="lib\experiments.py" />
     <Compile Include="get_device_info.py" />
