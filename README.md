@@ -70,3 +70,11 @@ Example:
 ```
 job_status.py ibmq_qasm_simulator 5bebe0123456789abcdef012
 ```
+
+bb84.py
+-------
+Runs a specific demonstration of the BB84 quantum key exchange protocol.
+
+Usage: bb84.py [ibm]
+
+If run with the "ibm" parameter, will run the quantum algorithms of the sequence on IBM simulator backend, otherwise, on a local simulator. These are not run on a real quantum system because the sequence includes three quantum algorithm executions and it would take too much time on real quantum systems.
